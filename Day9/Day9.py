@@ -6,59 +6,36 @@ def main(sample):
         lines = f.read().splitlines()
 
         Point = namedtuple('Point', 'x y')
-        head = Point(0, 0)
-        tail = Point(0, 0)
-        vList = [tail]
+        tail = head = Point(0, 0)
         visited = set([tail])
         for line in lines:
             direction, count = line.split()
             count = int(count)
-            if sample: print(direction, count, head, tail)
             match direction:
                 case 'R':
                     head = Point(head.x + count, head.y)
-                    prev = head.x - 1
-                    if prev != tail.x and head != tail:
-                        if sample: print(direction, range(tail.x + (0 if tail.y == head.y else 1), head.x))
+                    prev = Point(head.x - 1, head.y)
+                    if prev.x != tail.x and head.x != tail.x and head != tail:
                         [visited.add(Point(x, head.y)) for x in range(tail.x + (0 if tail.y == head.y else 1), head.x)]
-                        [vList.append(Point(x, head.y)) for x in range(tail.x + (0 if tail.y == head.y else 1), head.x)]
-                        tail = Point(prev, head.y)
-                        # visited.add(tail)
-                        if sample: print(head, tail, vList)
+                        tail = Point(prev.x, head.y)
                 case 'L':
                     head = Point(head.x - count, head.y)
-                    prev = head.x + 1
-                    if prev != tail.x and head != tail:
-                        if sample: print(direction, range(tail.x - (0 if tail.y == head.y else 1), head.x, -1))
+                    prev = Point(head.x + 1, head.y)
+                    if prev.x != tail.x and head.x != tail.x and head != tail:
                         [visited.add(Point(x, head.y)) for x in range(tail.x - (0 if tail.y == head.y else 1), head.x, -1)]
-                        [vList.append(Point(x, head.y)) for x in range(tail.x - (0 if tail.y == head.y else 1), head.x, -1)]
-                        tail = Point(prev, head.y)
-                        # visited.add(tail)
-                        if sample: print(direction, count, head, tail, vList)
+                        tail = Point(prev.x, head.y)
                 case 'U':
                     head = Point(head.x, head.y + count)
-                    prev = head.y - 1
-                    if prev != tail.y and head != tail:
-                        if sample: print(direction, range(tail.y + (0 if tail.x == head.x else 1), head.y))
+                    prev = Point(head.x, head.y - 1)
+                    if prev.y != tail.y and head.y != tail.y and head != tail:
                         [visited.add(Point(head.x, y)) for y in range(tail.y + (0 if tail.x == head.x else 1), head.y)]
-                        [vList.append(Point(head.x, y)) for y in range(tail.y + (0 if tail.x == head.x else 1), head.y)]
-                        tail = Point(head.x, prev)
-                        # visited.add(tail)
-                        if sample: print(head, tail, vList)
+                        tail = Point(head.x, prev.y)
                 case 'D':
                     head = Point(head.x, head.y - count)
-                    prev = head.y + 1
-                    if prev != tail.y and head != tail:
-                        if sample: print(direction, range(tail.y - (0 if tail.x == head.x else 1), head.y, -1))
+                    prev = Point(head.x, head.y + 1)
+                    if prev.y != tail.y and head.y != tail.y and head != tail:
                         [visited.add(Point(head.x, y)) for y in range(tail.y - (0 if tail.x == head.x else 1), head.y, -1)]
-                        [vList.append(Point(head.x, y)) for y in range(tail.y - (0 if tail.x == head.x else 1), head.y, -1)]
-                        tail = Point(head.x, prev)
-                        # visited.add(tail)
-                        if sample: print(head, tail, vList)
-            if sample: 
-                print(head, tail)
-                print()
-        if sample: print(len(visited), visited, '\n', vList)
+                        tail = Point(head.x, prev.y)
         print(len(visited))
 
 main(True)
