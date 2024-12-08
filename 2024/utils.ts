@@ -4,6 +4,7 @@ const args = process.argv
 const [_, file_in, data, level_in, ...extras] = args
 
 export enum ErrorLevels {
+    VERBOSE,
     DEBUG,
     INFO,
     ERROR,
