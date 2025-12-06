@@ -28,7 +28,7 @@ export const getData = () => {
     try {
         const input = fs.readFileSync(`./${folder}/${data}.txt`, 'utf8')
         debugLog(ErrorLevels.INFO, "input\n" + input)
-        lines = input.split('\r\n')
+        lines = input.split(/\s*\n\s*/)
     } catch (e) {
         debugLog(ErrorLevels.ERROR, e)
     }

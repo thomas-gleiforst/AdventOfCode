@@ -1,0 +1,17 @@
+# Java
+target/
+out/
+*.class
+*.log
+.idea/
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# build
+.gradle/
+
+# input files
+*.txt
