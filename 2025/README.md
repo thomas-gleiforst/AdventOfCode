@@ -25,3 +25,6 @@ Files created
 Notes
 - The template reads `2025/input.txt` by default (or accepts a file path as first arg).
 - Feel free to create new classes under `com.advent2025` for each day (Day2, Day3...).
+
+export JAVA_HOME="/c/oracleJdk-25"
+export PATH="$JAVA_HOME/bin:$PATH"
